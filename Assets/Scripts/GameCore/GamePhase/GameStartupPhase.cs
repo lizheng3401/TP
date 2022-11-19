@@ -1,8 +1,8 @@
-﻿using Framework.Entity;
+﻿using Framework;
+using Framework.Entity;
 using GameCore.GridModule;
 using GameCore.UI;
 using GameCore.UI.HUD;
-using GameCore.UI.Temp;
 using UnityEngine;
 
 namespace GameCore.GamePhase
@@ -19,7 +19,12 @@ namespace GameCore.GamePhase
             GlobalVars.ModuleManager.AddMoudle(gridManager);
             gridManager.Init();
             gridManager.CreateGrid(new Vector2Int(6,10), new Vector2(1,1), new Vector2(0.1f, 0.1f));
-            
+
+            // 保证battle位于屏幕中心
+            Vector3 center = GetBound(gridManager.GridRoot);
+            CameraManager.Instance.cameraFocusOn = center;
+            CameraManager.Instance.SwitchTo(CameraState.FocusOn);
+
             HUDPage hudPage = new HUDPage(new HUDView());
             hudPage.Show();
         }
@@ -27,6 +32,20 @@ namespace GameCore.GamePhase
         public override void OnExit()
         {
             
+        }
+
+        public Vector3 GetBound(Transform parentTrans)
+        {
+            Vector3 center = Vector3.zero;
+            Renderer[] renderers = parentTrans.GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+            {
+                center += renderer.bounds.center;
+            }
+
+            center = center / renderers.Length;
+            return center;
+
         }
     }
 }

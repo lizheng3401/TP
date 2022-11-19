@@ -79,12 +79,12 @@ namespace Framework.UI
             }
         }
 
-        internal override void ShutDown()
+		internal override void ShutDown()
         {
             
         }
 
-        public bool ShouldShow(UIController uiController)
+		public bool ShouldShow(UIController uiController)
         {
             if (uiController.Layer == UILayer.Page)
             {

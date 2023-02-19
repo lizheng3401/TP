@@ -75,7 +75,8 @@ namespace Framework.UI
                  current != null;
                  current = current.Next)
             {
-                current.Value.Tick(elapseSeconds, realElapseSeconds);
+                UIController uiController = current.Value;
+				uiController.Tick(elapseSeconds, realElapseSeconds);
             }
         }
 
@@ -94,6 +95,7 @@ namespace Framework.UI
                 return true;
             }else if (uiController.Layer == UILayer.Dialog)
             {
+                // 暂时让dialog全局唯一，确保退出游戏UI每次只有一个
                 return true;
             }
             else

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
-using Framework.GamePhase;
-using Unity.VisualScripting;
+
 using UnityEngine;
+
+using Framework.GamePhase;
 
 public class TPApplication: Singleton<TPApplication>
 {

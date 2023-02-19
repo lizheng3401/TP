@@ -1,9 +1,12 @@
-﻿using Framework;
+﻿using UnityEngine;
+
+using Framework;
 using Framework.Entity;
+using Framework.Input;
 using GameCore.GridModule;
 using GameCore.UI;
 using GameCore.UI.HUD;
-using UnityEngine;
+
 
 namespace GameCore.GamePhase
 {
@@ -11,7 +14,10 @@ namespace GameCore.GamePhase
     {
         public override void OnEnter()
         {
-            PlantManager entityManager = new PlantManager();
+            InputManager inputManager = new InputManager();
+            GlobalVars.ModuleManager.AddMoudle(inputManager);
+
+			PlantManager entityManager = new PlantManager();
             entityManager.Init();
             GlobalVars.ModuleManager.AddMoudle(entityManager);
             
